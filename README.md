@@ -1,6 +1,6 @@
 # AideAI
 
-**Live Demo**: [https://quickai-client.vercel.app](https://quickai-client.vercel.app)
+<!-- **Live Demo**: [https://quickai-client.vercel.app](https://quickai-client.vercel.app) -->
 
 AideAI is a powerful AI-powered platform designed to transform your content creation process. With a suite of premium AI tools, it helps you write engaging articles, generate stunning images, and streamline your workflow—all in one place.
 
@@ -82,6 +82,6 @@ npm run dev
 
 ## 🔗 Links
 
-* 🌐 [Live Demo](https://quickai-client.vercel.app)
+<!-- * 🌐 [Live Demo](https://quickai-client.vercel.app) -->
 * 🐙 [GitHub Repository](https://github.com/Yashjain9425/Aide_Ai)
 * 📧 Contact: [yashjain942546@gmail.com](yashjain942546@gmail.com)
