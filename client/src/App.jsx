@@ -10,7 +10,7 @@ import RemoveBackground from './pages/RemoveBackground.jsx'
 import RemoveObject from './pages/RemoveObject.jsx'
 import ReviewResume from './pages/reviewResume.jsx'
 import Community from './pages/Community.jsx'
-import { Toaster } from 'react-hot-toast.jsx'
+import { Toaster } from 'react-hot-toast'
 function App() {
   return (
     <div>
