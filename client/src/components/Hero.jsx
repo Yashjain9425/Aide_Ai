@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { assets } from '../assets/assets';
+import { assets } from '../assets/assets.js';
 
 function Hero() {
     const navigate = useNavigate();

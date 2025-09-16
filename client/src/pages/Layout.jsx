@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { assets } from '../assets/assets'
+import { assets } from '../assets/assets.js'
 import { Menu, X } from 'lucide-react'
-import Sidebar from '../components/Sidebar'
+import Sidebar from '../components/Sidebar.jsx'
 import { useUser,SignIn } from '@clerk/clerk-react'
 
 const Layout = () => {
