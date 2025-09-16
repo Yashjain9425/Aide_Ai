@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="flex flex-col md:flex-row justify-between gap-12 pb-10 border-b border-gray-300">
         {/* Logo and Description */}
         <div className="max-w-md">
-          <img src={assets.logo} alt="QuickAi Logo" className="h-10" />
+          <img src={assets.logo1} alt="QuickAi Logo" className="h-20" />
           <p className="mt-6 text-sm leading-relaxed">
             Experience the power of AI with <strong>QuickAi</strong>. Transform your content creation with our suite of premium AI tools. Write articles, generate images, and enhance your productivity like never before.
           </p>
