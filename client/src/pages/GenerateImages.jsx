@@ -1,4 +1,4 @@
-import { Image, Sparkles } from "lucide-react";
+import { Image, Sparkles, ArrowDownToLine } from "lucide-react";
 import React, { useState } from "react";
 
 import toast from "react-hot-toast";
@@ -53,6 +53,29 @@ const GenerateImages = () => {
     }
     setLoading(false)
   };
+  const handleDownload = (imageUrl) => {
+    try {
+      if (!imageUrl || typeof imageUrl !== 'string') {
+        throw new Error('Invalid image URL');
+      }
+      const randomSuffix = Math.floor(10000 + Math.random() * 90000); // 5 digits
+      const baseName = `aideai${randomSuffix}`;
+      const extMatch = imageUrl.match(/\.(png|jpg|jpeg|webp|gif)(\?.*)?$/i);
+      const ext = extMatch ? extMatch[1].toLowerCase() : 'jpg';
+      const downloadUrl = imageUrl.includes('/upload/')
+        ? imageUrl.replace('/upload/', `/upload/fl_attachment:${encodeURIComponent(baseName)}/`)
+        : imageUrl;
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = `${baseName}.${ext}`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   return (
     <div className="h-full overflow-y-scroll p-6 flex items-start flex-wrap gap-4 text-slate-700">
       {/* Left col */}
@@ -122,8 +145,14 @@ const GenerateImages = () => {
               <p>Enter a topic click "Generate image " to get started</p>
             </div>
           </div>): (
-            <div className="mt-3 h-full">
+            <div className="relative mt-3 h-full">
               <img src={content} alt=""  className="w-full h-full"/>
+              <div className="absolute top-5 right-2 z-10">
+                <ArrowDownToLine
+                  onClick={() => handleDownload(content)}
+                  className="w-9 h-9 p-2 rounded-full bg-white/90 text-black shadow-md hover:bg-white transition-colors duration-200 cursor-pointer"
+                />
+              </div>
             </div>
           )
         }

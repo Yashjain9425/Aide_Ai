@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth, useUser } from "@clerk/clerk-react";
-import { Heart } from "lucide-react";
+import { Heart,ArrowDownToLine } from "lucide-react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -27,6 +27,29 @@ const Community = () => {
       toast.error(error.message)
     }
     setLoading(false)
+  };
+  const handleDownload = (creation) => {
+    try {
+      const imageUrl = creation.content;
+      if (!imageUrl || typeof imageUrl !== 'string') {
+        throw new Error('Invalid image URL');
+      }
+      const randomSuffix = Math.floor(10000 + Math.random() * 90000); // 5 digits
+      const baseName = `aideai${randomSuffix}`;
+      const extMatch = imageUrl.match(/\.(png|jpg|jpeg|webp|gif)(\?.*)?$/i);
+      const ext = extMatch ? extMatch[1].toLowerCase() : 'jpg';
+      const downloadUrl = imageUrl.includes('/upload/')
+        ? imageUrl.replace('/upload/', `/upload/fl_attachment:${encodeURIComponent(baseName)}/`)
+        : imageUrl;
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = `${baseName}.${ext}`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   const imageLikeToggle = async(id)=> {
@@ -65,6 +88,12 @@ const Community = () => {
               alt=""
               className="w-full h-full object-cover rounded-lg"
             />
+            <div className="absolute top-5 right-2 z-10">
+              <ArrowDownToLine
+                onClick={() => handleDownload(creation)}
+                className="w-9 h-9 p-2 rounded-full bg-white/90 text-black shadow-md hover:bg-white transition-colors duration-200 cursor-pointer"
+              />
+            </div>
             <div className="absolute bottom-0 top-0 right-0 left-3 flex gap-2 items-end justify-end group-hover:justify-between p-3 group-hover:bg-gradient-to-b from-transparent to-black/80 text-white rounded-lg">
               <p className="text-sm hidden group-hover:block">
                 {creation.prompt}
