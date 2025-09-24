@@ -1,7 +1,5 @@
 # AideAI
 
-<!-- **Live Demo**: [https://quickai-client.vercel.app](https://quickai-client.vercel.app) -->
-
 AideAI is a powerful AI-powered platform designed to transform your content creation process. With a suite of premium AI tools, it helps you write engaging articles, generate stunning images, and streamline your workflow—all in one place.
 
 ---
@@ -49,7 +47,7 @@ AideAI is a powerful AI-powered platform designed to transform your content crea
 * **Backend**: Node.js, Express.js (API)
 * **Database**: Postgres(NEON)
 * **AI Integration**: OpenAI APIs, Image Processing APIs
-* **Hosting**: Vercel
+* **Hosting**: render
 
 ---
 
@@ -63,7 +61,7 @@ AideAI is a powerful AI-powered platform designed to transform your content crea
 ```bash
 # Clone the repository
 git clone https://github.com/Yashjain9425/Aide_Ai.git
-cd Quick-AI
+cd Aide_Ai
 
 # Install dependencies
 npm install
