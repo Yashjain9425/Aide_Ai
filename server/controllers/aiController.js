@@ -40,8 +40,8 @@ export const generateArticle = async (req, res) => {
     const content = response.choices[0].message.content;
 
     await sql` INSERT INTO creations (user_id, prompt,content,type) VALUES (${userId}, ${prompt}, ${content}, 'article')`;
-    cache.del("publishedCreations");
-    cache.del(`userCreations:${userId}`);
+    await cache.del("publishedCreations");
+    await cache.del(`userCreations:${userId}`);
     if (plan !== "premium") {
       await clerkClient.users.updateUserMetadata(userId, {
         privateMetadata: {
@@ -86,8 +86,8 @@ export const generateBlogTitle = async (req, res) => {
     const content = response.choices[0].message.content;
 
     await sql` INSERT INTO creations (user_id, prompt,content,type) VALUES (${userId}, ${prompt}, ${content}, 'blog-title')`;
-    cache.del("publishedCreations");
-    cache.del(`userCreations:${userId}`);
+    await cache.del("publishedCreations");
+    await cache.del(`userCreations:${userId}`);
     if (plan !== "premium") {
       await clerkClient.users.updateUserMetadata(userId, {
         privateMetadata: {
@@ -137,8 +137,8 @@ export const generateImage = async (req, res) => {
     await sql` INSERT INTO creations (user_id, prompt,content,type, publish) VALUES (${userId}, ${prompt}, ${secure_url}, 'image', ${
       publish ?? false
     })`;
-    cache.del("publishedCreations");
-    cache.del(`userCreations:${userId}`);
+    await cache.del("publishedCreations");
+    await cache.del(`userCreations:${userId}`);
 
     res.json({ success: true, content: secure_url });
   } catch (error) {
@@ -170,8 +170,8 @@ export const removeImageBackground = async (req, res) => {
     });
 
     await sql` INSERT INTO creations (user_id, prompt,content,type) VALUES (${userId}, 'Remove background from image', ${secure_url}, 'image')`;
-    cache.del("publishedCreations");
-    cache.del(`userCreations:${userId}`);
+    await cache.del("publishedCreations");
+    await cache.del(`userCreations:${userId}`);
 
     res.json({ success: true, content: secure_url });
   } catch (error) {
@@ -202,8 +202,8 @@ export const removeImageObject = async (req, res) => {
     })
 
     await sql` INSERT INTO creations (user_id, prompt,content,type) VALUES (${userId}, ${`Removed ${object} from image`}, ${imageUrl}, 'image')`;
-    cache.del("publishedCreations");
-    cache.del(`userCreations:${userId}`);
+    await cache.del("publishedCreations");
+    await cache.del(`userCreations:${userId}`);
 
     res.json({ success: true, content: imageUrl });
   } catch (error) {
@@ -251,8 +251,8 @@ export const resumeReview = async (req, res) => {
       const content = response.choices[0].message.content;
   
       await sql` INSERT INTO creations (user_id, prompt,content,type) VALUES (${userId}, 'Review the uploaded resume', ${content}, 'resume-review')`;
-      cache.del("publishedCreations");
-      cache.del(`userCreations:${userId}`);
+      await cache.del("publishedCreations");
+      await cache.del(`userCreations:${userId}`);
   
       res.json({ success: true, content });
     } catch (error) {

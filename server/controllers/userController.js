@@ -7,15 +7,15 @@ export const getUserCreations = async (req, res) => {
     const cacheKey = `userCreations:${userId}`;
     let creations;
 
-    if (cache.has(cacheKey)) {
-      creations = cache.get(cacheKey);
+    if (await cache.has(cacheKey)) {
+      creations = await cache.get(cacheKey);
     } else {
       creations = await sql`
         SELECT * FROM creations 
         WHERE user_id = ${userId} 
         ORDER BY created_at DESC
       `;
-      cache.set(cacheKey, creations);
+      await cache.set(cacheKey, creations, 300);
     }
 
     res.json({ success: true, creations });
@@ -27,11 +27,11 @@ export const getUserCreations = async (req, res) => {
 export const getPublishedCreations = async (req, res) => {
     try { 
       let creations; 
-      if(cache.has('publishedCreations')) {
-        creations = cache.get('publishedCreations');
+      if(await cache.has('publishedCreations')) {
+        creations = await cache.get('publishedCreations');
       }else{
         creations = await sql`SELECT * FROM creations WHERE publish = true ORDER BY created_at DESC`;
-        cache.set('publishedCreations', creations);
+        await cache.set('publishedCreations', creations, 300);
       }
       
   
@@ -70,9 +70,9 @@ export const getPublishedCreations = async (req, res) => {
 
         await sql `UPDATE creations SET likes = ${formattedArray}::text[] WHERE id = ${id}`
 
-        cache.del('publishedCreations'); 
-        cache.del(`userCreations:${userId}`);
-        cache.del(`userCreations:${creation.user_id}`);
+        await cache.del('publishedCreations'); 
+        await cache.del(`userCreations:${userId}`);
+        await cache.del(`userCreations:${creation.user_id}`);
       res.json({ success: true, message, likes: updatedLikes });
     } catch (error) {
       res.json({ success: false, message: error.message });
