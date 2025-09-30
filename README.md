@@ -24,6 +24,8 @@ AideAI is a powerful AI-powered platform designed to transform your content crea
 - **Anime-style artwork**
 - **3D-style renderings**
 
+* **AI Voice Generator**
+
 
 * **Background & Object Removal**
 

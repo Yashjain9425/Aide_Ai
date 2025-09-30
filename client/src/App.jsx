@@ -10,6 +10,7 @@ import RemoveBackground from './pages/RemoveBackground.jsx'
 import RemoveObject from './pages/RemoveObject.jsx'
 import ReviewResume from './pages/ReviewResume.jsx'
 import Community from './pages/Community.jsx'
+import GenerateAudio from './pages/GenerateAudio.jsx'
 import { Toaster } from 'react-hot-toast'
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="remove-background" element={<RemoveBackground/>}/>
           <Route path="remove-object" element={<RemoveObject/>}/>
           <Route path="review-resume" element={<ReviewResume/>}/>
+          <Route path="generate-audio" element={<GenerateAudio/>}/>
           <Route path="community" element={<Community/>}/>
 
         </Route>
