@@ -1,6 +1,12 @@
 version: '3.9'
 
 services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
   server:
     build:
       context: ./server
@@ -9,8 +15,11 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
+      - REDIS_URL=redis://redis:6379
     ports:
       - "3000:3000"
+    depends_on:
+      - redis
     restart: unless-stopped
 
   client:
@@ -18,10 +27,11 @@ services:
       context: ./client
       args:
         VITE_BASE_URL: http://server:3000
-    environment:
-      - VITE_BASE_URL=http://server:3000
+        VITE_CLERK_PUBLISHABLE_KEY: ${VITE_CLERK_PUBLISHABLE_KEY}
+    env_file:
+      - ./client/.env
     ports:
       - "5173:80"
     depends_on:
       - server
-    restart: unless-stopped
+    restart: unless-stopped  

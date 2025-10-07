@@ -57,7 +57,6 @@ AideAI is a powerful AI-powered platform designed to transform your content crea
 
 
 ---
-
 ## 📦 Installation (For Development)
 
 ```bash
@@ -65,12 +64,15 @@ AideAI is a powerful AI-powered platform designed to transform your content crea
 git clone https://github.com/Yashjain9425/Aide_Ai.git
 cd Aide_Ai
 
-# Install dependencies
-npm install
+# Build and start the containers
+docker-compose up --build
 
-# Start the development server
-npm run dev
-```
+# The backend server will be available at:
+# http://localhost:3000
+
+# The frontend client will be available at:
+# http://localhost:5173
+
 
 ---
 
