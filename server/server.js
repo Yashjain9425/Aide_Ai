@@ -40,11 +40,12 @@ const __dirname = path.dirname(__filename);
 const clientDist = path.join(__dirname, "..", "client", "dist");
 app.use(express.static(clientDist));
 
-app.use((req, res, next) => {
-  if (req.path.startsWith("/api")) {
-    return res.status(404).json({ error: "API route not found" });
+app.get("*", (req, res) => {
+  if (!req.path.startsWith("/api")) {
+    res.sendFile(path.join(clientDist, "index.html"));
+  } else {
+    res.status(404).json({ error: "API route not found" });
   }
-  res.sendFile(path.join(clientDist, "index.html"));
 });
 
 app.listen(PORT, () => {
